@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Installs and configures Nginx on a new Ubuntu machine
+
+# Updates the package list
+apt-get update
+
+# Installs Nginx with the -y flag to automatically confirm installation
+apt-get install -y nginx
+
+# Configures Nginx to listen on port 80
+cat <<EOF > /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+# Restarts the Nginx service
+service nginx restart
+
+# Sets the default Nginx page to contain "Hello World"
+echo "Hello World!" > /var/www/html/index.html
+
