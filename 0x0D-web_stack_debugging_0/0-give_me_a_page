@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Pull Docker image
+docker pull holbertonschool/265-0
+
+# Start container and map port 8080 to port 80
+docker run -p 8080:80 -d -it holbertonschool/265-0
+
+# Connect to container
+docker exec -it <container-id> /bin/bash
+
+# Check Apache status
+service apache2 status
+
+# Start Apache server if not running
+service apache2 start
+
+# Check Apache configuration
+cat /etc/apache2/sites-available/000-default.conf
+
+# Create index.html file
+echo "Hello Holberton" > /var/www/html/index.html
+
+# Exit container
+exit
+
+# Check if Apache server is running and returns "Hello Holberton"
+curl 0:8080
+
