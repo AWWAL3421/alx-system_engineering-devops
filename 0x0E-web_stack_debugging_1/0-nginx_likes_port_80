@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# nginx listen to port 80
+# nginx likes port 80
 
 apt-get update -y
 apt-get install -y nginx 
-systemctl start nginx
-systemctl enable nginx
+sudo service nginx start
+sudo service nginx enable
